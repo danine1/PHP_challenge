@@ -1,19 +1,33 @@
-<?php
-include 'lib/data-functions.php';
-$actors = array();
-if (isset($_POST['name']))
-{
-    $actors["name"]=$_POST["name"];
-}
-if (isset($_POST['sex']))
-{
-    $actors["sex"]=$_POST["sex"];
-}
-if (isset($_POST['bio']))
-{
-    $actors["bio"]=$_POST["bio"];
-}
-insert_data ($actors);
+<?php 
+    require 'lib/data-functions.php';
+
+    $errors = array();
+    function error($name,$output) {
+        if ($_POST) {
+            $errors = array();
+            if (empty($_POST[$name])) {
+                $errors[] = $output;
+            } 
+            if (empty($errors)) {
+                // savedate()
+                header("Location: thanks.php");
+                exit();
+            } else {
+                foreach ($errors as $error) {
+                    echo $error . '<br>';
+                }
+            } 
+        } 
+    }  
+
+    $data = [];
+    foreach($_POST as $key => $value) {
+        $data[$key]=$value;
+    }
+
+    if (isset($data['name'])) {
+        insert_data($data);
+    }
 ?>
 
 <style>
@@ -34,7 +48,7 @@ input[type=text], select {
 
 input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #aeff00;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -47,10 +61,10 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
+.betty {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 textarea {
@@ -65,43 +79,46 @@ textarea {
 }
 </style>
 
-<?php
 
 
 
-if ($_POST) {
-    $errors = array();
-    if (empty($_POST['name'])) {
-        $errors[] = 'missing actorname';
-    }
-    if (empty($_POST['sex'])) {
-        $errors[] = 'missing sex';
-    }
-    if (empty($_POST['bio'])) {
-        $errors[] = 'missing biography';
-    }
-    if (empty($errors)) {
-        //savedata()
-        header('Location: actors_form.php?status=ok');
-        exit();
-    } else {
-        foreach ($errors as $error) {
-            echo $error;
-        }
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
-?>
+<div>
+<img class="betty" src="betty.png" alt="">
+<h1 style="text-align:center;font-family:helvetica;color:055b8c;">Actors/Actresses sign up here:</h1>
+</div>
 
-<form method="post" class="form">
+<form action="index.php" style="font-family:helvetica;color:055b8c;" method="post" class="form">
     Actor Name:<input type="text" name="name"><br>
     Sex:<select name="sex">
 	<option value="male">Male</option>
 	<option value="female" selected>Female</option>
-    </select><br>
-     Biography:<textarea name="bio" id="" cols="30" rows="10"></textarea><br>
+    </select><br><br>
+    Addiction<input type="radio" name="addiction" value="Cocaine" checked>Cocaine
+    <input type="radio" name="addiction" value="Booze">Booze
+    <input type="radio" name="addiction" value="other"> Other<br><br>   
+     Sob Story:<textarea name="bio" id="" cols="30" rows="10"></textarea><br>
     <input type="submit" value="send">
+    <a href="list.php">Current inmates.</a>
 </form>
+
+<p><?php error('name','You don\'t have a name?<br>');?></p>
+    
+</body>
+</html>
+
+
+
+
 
 
 
