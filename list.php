@@ -19,16 +19,16 @@ function li_generator($index) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Betty Ford</title>
 </head>
 <body>
 
-<h1>List of inmates</h1>
-<ol>
+<h1 style="text-align:center;font-family:helvetica;color:055b8c;">List of inmates</h1>
+<ol style="text-align:center;font-family:helvetica;color:055b8c;">
 <?php li_generator($index) ?>
 </ol>
 
-<a href="index.php">Back to form</a>
+<a style="text-align:center;font-family:helvetica;color:055b8c;" href="index.php">Back to form</a>
     
 </body>
 </html>

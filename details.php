@@ -9,18 +9,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Betty Ford</title>
 </head>
 <body>
 
-<nav>
-<a href="index.php">Go to the form</a><br>
-<a href="list.php">Go to the list</a><br>
+<nav style="text-align:center;font-family:helvetica;color:055b8c;">
+<a style="text-align:center;font-family:helvetica;color:055b8c;" href="index.php">Go to the form</a><br>
+<a style="text-align:center;font-family:helvetica;color:055b8c;" href="list.php">Go to the list</a><br>
 </nav>
 
-<h1>Details of <?php echo $_GET['name']; ?></h1>
+<h1 style="text-align:center;font-family:helvetica;color:055b8c;">Details of <?php echo $_GET['name']; ?></h1>
 
-<ol>
+<ol style="text-align:center;font-family:helvetica;color:055b8c;">
 <?php  
             foreach ($_GET as $key => $value) {
                 if ($key=='id') {
